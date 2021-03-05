@@ -99,6 +99,21 @@ services:
     networks:
       - digitalcave
 
+  yarn:
+    build:
+      args:
+        user: ${USER}
+        uid: ${UID}
+      context: .
+      dockerfile: dockerfiles/npm.dockerfile
+    container_name: yarn
+    volumes:
+      - ${PROJECT_ROOT-./src}:${SERVER_PROJECT_ROOT}
+    working_dir: ${SERVER_PROJECT_ROOT}
+    entrypoint: [ 'yarn' ]
+    networks:
+      - digitalcave
+
   artisan:
     build:
       args:
